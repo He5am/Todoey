@@ -1,6 +1,8 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:todoey/models/task_data.dart';
 import 'Screens/task_screen.dart';
 
 void main() {
@@ -12,10 +14,13 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      theme: ThemeData(primarySwatch: Colors.teal),
-      debugShowCheckedModeBanner: false,
-      home: TaskScreen(),
+    return ChangeNotifierProvider(
+      create: (context) => TaskData(),
+      child: MaterialApp(
+        theme: ThemeData(primarySwatch: Colors.teal),
+        debugShowCheckedModeBanner: false,
+        home: TaskScreen(),
+      ),
     );
   }
 }

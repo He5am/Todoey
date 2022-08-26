@@ -1,24 +1,12 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:flutter/material.dart';
+import 'package:todoey/models/task_data.dart';
 import '../widgets/task_list.dart';
 import 'add_task_screen.dart';
-import 'package:todoey/models/task.dart';
+import 'package:provider/provider.dart';
 
-class TaskScreen extends StatefulWidget {
-  const TaskScreen({Key? key}) : super(key: key);
-
-  @override
-  State<TaskScreen> createState() => _TaskScreenState();
-}
-
-class _TaskScreenState extends State<TaskScreen> {
-  List<Task> tasks = [
-    Task(taskTitle: "buy Milk"),
-    Task(taskTitle: "buy Eggs"),
-    Task(taskTitle: "buy Meat"),
-  ];
-
+class TaskScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -27,13 +15,7 @@ class _TaskScreenState extends State<TaskScreen> {
         onPressed: () {
           showModalBottomSheet(
             context: context,
-            builder: (BuildContext context) => AddTaskScreen((newTasktitle) {
-              setState(() {
-                tasks.add(
-                  Task(taskTitle: newTasktitle),
-                );
-              });
-            }),
+            builder: (BuildContext context) => AddTaskScreen(),
           );
         },
         backgroundColor: Colors.teal,
@@ -70,7 +52,9 @@ class _TaskScreenState extends State<TaskScreen> {
                       fontWeight: FontWeight.w700),
                 ),
                 Text(
-                  tasks.length==1 ? "${tasks.length} task" : "${tasks.length} tasks",
+                  Provider.of<TaskData>(context).taskCount == 1
+                      ? "${Provider.of<TaskData>(context).taskCount} task"
+                      : "${Provider.of<TaskData>(context).taskCount} tasks",
                   style: TextStyle(color: Colors.white, fontSize: 19),
                 ),
               ],
@@ -86,7 +70,7 @@ class _TaskScreenState extends State<TaskScreen> {
               ),
               child: Padding(
                 padding: EdgeInsets.symmetric(horizontal: 20),
-                child: TasksList(tasks),
+                child: TasksList(),
               ),
             ),
           ),
