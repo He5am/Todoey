@@ -1,9 +1,7 @@
 // ignore_for_file: prefer_const_constructors, use_key_in_widget_constructors, prefer_const_literals_to_create_immutables, unused_local_variable, prefer_const_constructors_in_immutables, must_be_immutable
 import 'package:flutter/material.dart';
-import 'package:todoey/models/task.dart';
 import 'package:todoey/models/task_data.dart';
-import '../widgets/task_list.dart';
-import 'add_task_screen.dart';
+
 import 'package:provider/provider.dart';
 
 class AddTaskScreen extends StatelessWidget {

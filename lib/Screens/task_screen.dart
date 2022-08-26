@@ -7,6 +7,8 @@ import 'add_task_screen.dart';
 import 'package:provider/provider.dart';
 
 class TaskScreen extends StatelessWidget {
+  const TaskScreen({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -51,11 +53,15 @@ class TaskScreen extends StatelessWidget {
                       fontSize: 40,
                       fontWeight: FontWeight.w700),
                 ),
-                Text(
-                  Provider.of<TaskData>(context).taskCount == 1
-                      ? "${Provider.of<TaskData>(context).taskCount} task"
-                      : "${Provider.of<TaskData>(context).taskCount} tasks",
-                  style: TextStyle(color: Colors.white, fontSize: 19),
+                Consumer<TaskData>(
+                  builder: (context, value, child) {
+                    return Text(
+                      value.taskCount == 1 || value.taskCount == 0
+                          ? "${value.taskCount} task"
+                          : "${value.taskCount} tasks",
+                      style: TextStyle(color: Colors.white, fontSize: 19),
+                    );
+                  },
                 ),
               ],
             ),
